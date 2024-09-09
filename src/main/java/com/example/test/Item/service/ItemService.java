@@ -36,6 +36,17 @@ public class ItemService {
 			.toList();
 	}
 
+	@Transactional
+	public ItemResDto updatePost(Long id, ItemReqDto reqDto) {
+		Item findItem = itemRepository.findById(id).orElseThrow(
+			() -> new RuntimeException("게시글을 찾을 수 없습니다.")
+		);
+
+		findItem.update(reqDto.username(), reqDto.title(), reqDto.content(), reqDto.price());
+
+		return new ItemResDto(findItem);
+	}
+
 	private ItemResDto convertToFindPostDto(Item item) {
 		return new ItemResDto(item);
 	}
