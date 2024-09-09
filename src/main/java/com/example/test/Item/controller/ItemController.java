@@ -1,6 +1,9 @@
 package com.example.test.Item.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +24,12 @@ public class ItemController {
 	@PostMapping("/post")
 	public ResponseEntity<ItemResDto> createPost(@RequestBody ItemReqDto itemReqDto) {
 		ItemResDto response = itemService.createPost(itemReqDto);
+		return ResponseEntity.ok(response);
+	}
+
+	@GetMapping("/post")
+	public ResponseEntity<List<ItemResDto>> findAllPost() {
+		List<ItemResDto> response = itemService.findAllPost();
 		return ResponseEntity.ok(response);
 	}
 }
