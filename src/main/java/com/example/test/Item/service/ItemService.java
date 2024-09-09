@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.test.Item.domain.Item;
 import com.example.test.Item.dto.request.ItemReqDto;
+import com.example.test.Item.dto.response.ItemDeleteResDto;
 import com.example.test.Item.dto.response.ItemResDto;
 import com.example.test.Item.repository.ItemRepository;
 
@@ -45,6 +46,12 @@ public class ItemService {
 		findItem.update(reqDto.username(), reqDto.title(), reqDto.content(), reqDto.price());
 
 		return new ItemResDto(findItem);
+	}
+
+	@Transactional
+	public ItemDeleteResDto deletePost(Long id) {
+		itemRepository.deleteById(id);
+		return new ItemDeleteResDto("삭제 완료");
 	}
 
 	private ItemResDto convertToFindPostDto(Item item) {
