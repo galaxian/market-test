@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,6 +32,12 @@ public class ItemController {
 	@GetMapping("/post")
 	public ResponseEntity<List<ItemResDto>> findAllPost() {
 		List<ItemResDto> response = itemService.findAllPost();
+		return ResponseEntity.ok(response);
+	}
+
+	@PutMapping("/post/{id}")
+	public ResponseEntity<ItemResDto> updatePost(@PathVariable Long id, @RequestBody ItemReqDto itemReqDto) {
+		ItemResDto response = itemService.updatePost(id, itemReqDto);
 		return ResponseEntity.ok(response);
 	}
 }
